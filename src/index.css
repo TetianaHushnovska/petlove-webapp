@@ -72,6 +72,6 @@ button {
 
 .container {
   width: 1280px;
-  padding: 32px;
+  padding: 0 32px 32px 32px;
   margin: 0 auto;
 }

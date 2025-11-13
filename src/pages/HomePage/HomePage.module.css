@@ -1,10 +1,54 @@
 .section{
-    width: 100%;
+    width: 1280px;
     height: 100vh;
+    padding: 16px 32px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.titleWrap{
+    width: 100%;
+    height: 384px;
+    padding: 32px 64px;
+    background-color: #F6B83D;
+    border-radius: 60px;
+    display: flex;
+    flex-direction: row;
+    gap: 73px;
+    align-items: flex-end;
+    color: #fff;
+}
+
+.title{
+    width: 760px;
+    font-size: 90px;
+    font-weight: 700;
+    line-height: 87px;
+    letter-spacing: -0.03em;
+}
+
+.span{
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.subtitle{
+    width: 255px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.02em;
+}
+
+.hero{
+    width: 100%;
+    height: 384px;
+    border-radius: 60px;
     background-image: image-set(
         url("/img/hero.jpg") 1x,
-        url("/img/hero@2x.jpg") 2x
+        url("/img/hero@2x.jpg") 2x,
     );
-    background-size: cover;
     background-position: center;
+    background-size: cover;
 }

@@ -1,0 +1,78 @@
+.registerWrap, .loginWrap{
+    width: 592px;
+    height: 654px;
+    border-radius: 60px;
+    background-image: image-set(
+        url("/img/register.jpg") 1x,
+        url("/img/register@2x.jpg") 2x
+    );
+    background-position: center;
+    background-size: cover;
+    padding-top: 436px;
+    padding-left: 61px;
+}
+
+.loginWrap{
+    background-image: image-set(
+        url("/img/login.jpg") 1x,
+        url("/img/login@2x.jpg") 2x
+    );
+}
+
+.card{
+    width: 294px;
+    height: 121px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #FFF4DF;
+    font-size: 32px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 60px;
+}
+
+.details{
+    width: 194px;
+}
+
+.box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.name{
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    color: #F6B83D;
+}
+
+.date{
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.span{
+    color: rgba(38, 38, 38, 0.5);
+}
+
+.desc{
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    letter-spacing: -0.02em;
+    color: rgba(38, 38, 38, 0.8);
+}

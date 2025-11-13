@@ -1,0 +1,27 @@
+.wrap{
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}
+
+.registerBox{
+    width: 592px;
+    height: 654px;
+    padding: 77px 84px;
+    border-radius: 60px;
+    background-color: #fff;
+}
+
+.text{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    color: rgba(38, 38, 38, 0.5);
+    text-align: center;
+}
+
+.link{
+    color: #F6B83D;
+    text-decoration: underline;
+}

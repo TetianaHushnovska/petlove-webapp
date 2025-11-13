@@ -1,0 +1,56 @@
+.authNav {
+    display: flex;
+    gap: 8px;
+}
+
+.login,
+.register {
+    height: 50px;
+    padding: 15px 20px;
+    border-radius: 30px;
+    background-color: #F6B83D;
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: capitalize;
+    transition: background-color 0.3s ease-in;
+}
+
+.register {
+    background-color: #FFF4DF;
+    color: #F6B83D;
+}
+
+.login:hover {
+    background-color: #F9B020;
+}
+
+.register:hover {
+    background-color: #FBE7C1;
+}
+
+.loginHome,
+.registerHome {
+    height: 50px;
+    padding: 15px 20px;
+    border-radius: 30px;
+    background-color: #F6B83D;
+    color: #ffffff;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    text-transform: capitalize;
+    transition: all 0.3s ease-in;
+}
+
+.registerHome {
+    background-color: #FFF4DF;
+    color: #F6B83D;
+}
+
+.loginHome:hover {
+    background-color: #FFF4DF;
+    color: #F6B83D;
+}
+
+.registerHome:hover {
+    background-color: #FBE7C1;
+}

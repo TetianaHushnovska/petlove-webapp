@@ -1,43 +1,18 @@
-import { Link, NavLink } from "react-router";
 import css from "./Heade.module.css";
+import Logo from "../Logo/Logo";
+import Nav from "../Nav/Nav";
+import AuthNav from "../AuthNav/AutnNav";
+import { useLocation } from "react-router";
 
 export default function Header() {
-  return (
-    <header className={css.header}>
-      <div>
-        <Link to="/" className={css.link}>
-          <svg className={css.logo}>
-            <use href="/public/icons.svg#icon-logo" />
-          </svg>
-        </Link>
-      </div>
+  const location = useLocation();
+  const isHome = location.pathname === "/home";
 
-      <nav className={css.nav}>
-        <NavLink
-          to="/news"
-          className={({ isActive }) =>
-            `${css.navLink} ${isActive ? css.isActive : ""}`
-          }
-        >
-          News
-        </NavLink>
-        <NavLink
-          to="/notice"
-          className={({ isActive }) =>
-            `${css.navLink} ${isActive ? css.isActive : ""}`
-          }
-        >
-          Find pet
-        </NavLink>
-        <NavLink
-          to="/friends"
-          className={({ isActive }) =>
-            `${css.navLink} ${isActive ? css.isActive : ""}`
-          }
-        >
-          Our friends
-        </NavLink>
-      </nav>
+  return (
+    <header className={isHome ? css.headerHome : css.header}>
+      <Logo />
+      <Nav />
+      <AuthNav />
     </header>
   );
 }

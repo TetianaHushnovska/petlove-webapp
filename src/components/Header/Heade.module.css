@@ -8,42 +8,21 @@
     justify-content: space-between;
     border-radius: 0 0 12px 12px;
     padding: 0 64px;
+    position: static;
 }
 
-.link{
-    height: 50px;
+.headerHome{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: 1280px;
+    height: 112px;
+    background-color: transparent;
     display: flex;
     align-items: center;
-    transition: all 0.3s ease-in;
-}
-
-.link:hover{
-    color: #fff;
-    background-color: #F6B83D;
-}
-
-.logo{
-    width: 105px;
-    height: 28px;
-}
-
-.nav{
-    display: flex;
-    gap: 10px;
-}
-
-.navLink{
-    height: 50px;
-    padding: 15px 20px;
-    border: 1px solid rgba(38, 38, 38, 0.15);
-    border-radius: 30px;
-    transition: border-color 0.3s ease-in;
-}
-
-.navLink:hover{
-    border-color: #F6B83D;
-}
-
-.isActive{
-    border-color: #F6B83D;
+    justify-content: space-between;
+    border-radius: 0 0 12px 12px;
+    padding: 0 64px;
 }

@@ -1,0 +1,15 @@
+.title{
+    font-size: 54px;
+    font-weight: 700;
+    line-height: 54px;
+    letter-spacing: -0.04em;
+    margin-bottom: 16px;
+}
+
+.subtext{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+}

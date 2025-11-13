@@ -1,0 +1,28 @@
+.link {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease-in;
+}
+
+.logo {
+    width: 105px;
+    height: 28px;
+}
+
+.linkHome{
+    width: 105px;
+    height: 50px;
+    --color1: #ffffff;
+    --color2: #ffffff;
+}
+
+.link:hover {
+    background-color: #F6B83D;
+    --color1: #ffffff;
+    --color2: #ffffff;
+}
+
+.linkHome:hover{
+    --color1: #262626;
+}
