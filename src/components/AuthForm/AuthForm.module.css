@@ -33,18 +33,27 @@
     top: 50%;
     width: 20px;
     height: 20px;
-    transform: translateY(-50%);
+    transform: translateY(-70%);
     fill: #f6b83d;
     cursor: pointer;
+    z-index: 2;
 }
 
 .stateIcon {
     position: absolute;
-    right: 50px;
     top: 50%;
     width: 20px;
     height: 20px;
-    transform: translateY(-50%);
+    transform: translateY(-70%);
+    z-index: 2;
+}
+
+.stateIconBeforeEye {
+    right: 52px;
+}
+
+.stateIconRight {
+    right: 20px;
 }
 
 .errorMessage {

@@ -58,15 +58,27 @@ export default function AuthForm({ fields, buttonText, onSubmit, schema }) {
 
             {/* ERROR ICON */}
             {isError && (
-              <svg className={`${css.stateIcon} ${css.errorIcon}`}>
-                <use href="/icons.svg#icon-cross" />
+              <svg
+                className={
+                  isPassword
+                    ? `${css.stateIcon} ${css.stateIconBeforeEye} ${css.errorIcon}`
+                    : `${css.stateIcon} ${css.stateIconRight} ${css.errorIcon}`
+                }
+              >
+                <use href={`${sprite}#icon-cross`} />
               </svg>
             )}
 
             {/* SUCCESS ICON */}
             {isSuccess && (
-              <svg className={`${css.stateIcon} ${css.successIcon}`}>
-                <use href="/icons.svg#icon-tik" />
+              <svg
+                className={
+                  isPassword
+                    ? `${css.stateIcon} ${css.stateIconBeforeEye} ${css.successIcon}`
+                    : `${css.stateIcon} ${css.stateIconRight} ${css.successIcon}`
+                }
+              >
+                <use href={`${sprite}#icon-tik`} />
               </svg>
             )}
 

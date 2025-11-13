@@ -4,10 +4,19 @@ import Title from "../../components/Title/Title";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { registerSchema } from "../../utils/schemas";
 import { Link } from "react-router";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../redux/auth/authOperations";
 
 export default function RegisterPage() {
+  const dispatch = useDispatch();
+
   const onSubmit = (data) => {
-    console.log("REGISTER:", data);
+    const cleanData = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    };
+    dispatch(registerUser(cleanData));
   };
 
   return (

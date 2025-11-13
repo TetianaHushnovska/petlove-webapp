@@ -1,0 +1,80 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const api = axios.create({
+    baseURL: "https://petlove.b.goit.study/api",
+});
+
+const setToken = (token) => {
+    api.defaults.headers.common.Authorization = `Bearer ${token}`;
+}
+
+const clearToken = () => {
+    delete api.defaults.headers.common.Authorization;
+}
+
+// Register
+export const registerUser = createAsyncThunk(
+    "auth/register",
+    async (data, thunkAPI) => {
+        try {
+            const response = await api.post("/users/signup", data);
+            setToken(response.data.token);
+            return response.data;
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue(err.response.data?.message || "Error")
+        }
+    }
+);
+
+// Login
+export const loginUser = createAsyncThunk(
+    "auth/login",
+    async (credentials, thunkAPI) => {
+        try {
+            const response = await api.post("/users/signin", credentials);
+            setToken(response.data.token);
+            return response.data;
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue(err.response.data?.message || "Error")
+        }
+    }
+);
+
+// Logout
+export const logoutUser = createAsyncThunk(
+    "auth/logout",
+    async (_, thunkAPI) => {
+        try {
+            await api.post("/users/signout");
+            clearToken();
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue(err.response.data?.message || "Error")
+        }
+    }
+);
+
+// Refresh user
+export const refreshUser = createAsyncThunk(
+    "auth/refresh",
+    async (_, thunkAPI) => {
+        const state = thunkAPI.getState();
+        const refreshToken = state.auth.refreshToken;
+
+        if (!refreshToken) return thunkAPI.rejectWithValue("No refresh token");
+
+        try {
+            api.defaults.headers.common.Authorization = `Bearer ${refreshToken}`;
+
+            const response = await api.post("/users/refresh");
+            setToken(response.data.token);
+
+            return response.data;
+        } catch (err) {
+            return thunkAPI.rejectWithValue("Session expired");
+        }
+    }
+)
