@@ -27,9 +27,12 @@ const authSlice = createSlice({
             })
             .addCase(registerUser.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
-                state.user = payload.user;
+                state.user = {
+                    name: payload.user.name,
+                    email: payload.user.email,
+                    avatarURL: null,
+                };
                 state.token = payload.token;
-                state.refreshToken = payload.refreshToken;
                 state.isLoggedIn = true;
             })
             .addCase(registerUser.rejected, (state, action) => {
@@ -44,9 +47,8 @@ const authSlice = createSlice({
             })
             .addCase(loginUser.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
-                state.user = payload.user;
+                state.user = { name: payload.name, email: payload.email, avatarURL: payload.avatarURL }
                 state.token = payload.token;
-                state.refreshToken = payload.refreshToken;
                 state.isLoggedIn = true;
             })
             .addCase(loginUser.rejected, (state, action) => {

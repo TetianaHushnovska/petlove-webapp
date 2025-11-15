@@ -23,5 +23,11 @@
 <symbol id="icon-tik" viewBox="0 0 45 32">
 <path fill="none" stroke="#08aa83" style="stroke: var(--color1, #08aa83)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4" d="M41.111 2l-26.889 26.889-12.222-12.222"></path>
 </symbol>
+
+<symbol id="icon-profile" viewBox="0 0 32 32">
+<path fill="#fff4df" style="fill: var(--color1, #fff4df)" d="M32 16c0 8.837-7.163 16-16 16s-16-7.163-16-16c0-8.837 7.163-16 16-16s16 7.163 16 16z"></path>
+<path fill="#f6b83d" style="fill: var(--color2, #f6b83d); stroke: var(--color2, #f6b83d)" stroke="#f6b83d" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.28" d="M16 17.92c-2.029 0-3.833 0.98-4.982 2.5-0.247 0.327-0.371 0.491-0.367 0.712 0.003 0.171 0.11 0.386 0.245 0.492 0.174 0.137 0.415 0.137 0.897 0.137h8.413c0.482 0 0.723 0 0.897-0.137 0.134-0.105 0.242-0.321 0.245-0.492 0.004-0.221-0.12-0.385-0.367-0.712-1.149-1.52-2.953-2.5-4.982-2.5z"></path>
+<path fill="#f6b83d" style="fill: var(--color2, #f6b83d); stroke: var(--color2, #f6b83d)" stroke="#f6b83d" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.28" d="M16 16c1.591 0 2.88-1.289 2.88-2.88s-1.289-2.88-2.88-2.88c-1.591 0-2.88 1.289-2.88 2.88s1.289 2.88 2.88 2.88z"></path>
+</symbol>
   </defs>
 </svg>  

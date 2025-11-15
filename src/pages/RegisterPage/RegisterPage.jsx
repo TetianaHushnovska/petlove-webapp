@@ -3,20 +3,35 @@ import PetBlock from "../../components/PetBlock/PetBlock";
 import Title from "../../components/Title/Title";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { registerSchema } from "../../utils/schemas";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../redux/auth/authOperations";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const cleanData = {
       name: data.name,
       email: data.email,
       password: data.password,
     };
-    dispatch(registerUser(cleanData));
+
+    try {
+      await dispatch(registerUser(cleanData)).unwrap();
+      navigate("/profile");
+    } catch (err) {
+      if (err === "Such email already exists") {
+        iziToast.error({
+          title: "",
+          message: "This email is already registered",
+          position: "topRight",
+        });
+      }
+    }
   };
 
   return (

@@ -1,0 +1,92 @@
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 40px 16px;
+}
+
+.modal {
+    width: 448px;
+    background: #fff;
+    border-radius: 30px;
+    padding: 80px;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modalBtn {
+    width: 24px;
+    height: 24px;
+    color: #121417;
+    position: absolute;
+    top: 26px;
+    right: 26px;
+}
+
+.icon {
+    width: 12px;
+    height: 12px;
+    stroke: #262626;
+    --color2: #262626;
+}
+
+.pet{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #FFF4DF;
+    font-size: 44px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 80px;
+    margin-bottom: 20px;
+}
+
+.title{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+}
+
+.btnBox{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.submit, .cancel{
+    width: 140px;
+    height: 48px;  
+    border-radius: 30px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    background-color: #F6B83D;
+    color: #fff;
+    transition: background-color 0.3ms ease-in-out;
+}
+
+.cancel{
+    background-color: rgba(38, 38, 38, 0.05);
+    color: #262626;
+}
+
+.submit:hover{
+    background-color: #F9B020;
+}
+
+.cancel:hover{
+    background-color: rgba(38, 38, 38, 0.08);
+}
