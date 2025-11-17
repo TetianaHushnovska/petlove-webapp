@@ -7,6 +7,8 @@ import "./App.css";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import NewsPage from "../../pages/NewsPage/NewsPage";
+import FriendsPage from "../../pages/FriendsPage/FriendsPage";
 
 function App() {
   const location = useLocation();
@@ -30,9 +32,9 @@ function App() {
         <Route path="home" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        {/* <Route path="news" element={<NewsPage />} />
-        <Route path="notices" element={<NoticesPage />} />
-        <Route path="friends" element={<FriendsPage />} /> */}
+        <Route path="news" element={<NewsPage />} />
+        <Route path="friends" element={<FriendsPage />} />
+        {/* {/* <Route path="notices" element={<NoticesPage />} /> */}
 
         {/* Private routes */}
         <Route

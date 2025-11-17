@@ -1,0 +1,53 @@
+form{
+    width: 230px;
+    height: 48px;
+    position: relative;
+}
+
+.input{
+    width: 230px;
+    height: 48px;
+    outline: none;
+    background-color: transparent;
+    border-radius: 30px;
+    border: 1px solid #F6B83D;
+    padding: 14px 48px 14px 14px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+}
+
+.input:placeholder-shown{
+    border-color: rgba(38, 38, 38, 0.15);
+}
+.searchBtn,
+.clearBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.searchBtn {
+    right: 14px;
+}
+
+.clearBtn {
+    right: 38px;
+}
+
+.icon {
+    width: 18px;
+    height: 18px;
+    fill: transparent;
+    stroke: #262626;
+}
+
+.clearIcon {
+    width: 14px;
+    height: 14px;
+    stroke: #262626;
+    --color2: #262626;
+}

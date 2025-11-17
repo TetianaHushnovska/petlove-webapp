@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./auth/authSlice";
+import newsReducer from "./news/newsSlice";
+import friendsReducer from "./friends/friendsSlice";
 
 import {
     persistStore,
@@ -23,6 +25,8 @@ const authPersistConfig = {
 const store = configureStore({
     reducer: {
         auth: persistReducer(authPersistConfig, authReducer),
+        news: newsReducer,
+        friends: friendsReducer,
     },
 
     middleware: (getDefaultMiddleware) =>

@@ -1,0 +1,69 @@
+.card{
+    width: 371px;
+    height: 196px;
+    background-color: #fff;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    padding: 40px 12px 20px 20px;
+    position: relative;
+}
+
+.logo{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.time{
+    width: 102px;
+    height: 34px;
+    border-radius: 30px;
+    background-color: #FFF4DF;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #F6B83D;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+.title{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: -0.04em;
+    margin-bottom: 20px;
+}
+
+.text,
+.link{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+
+.link{
+    display: block;
+    max-width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: text-decoration 0.3ms ease-in-out;
+}
+
+.link:hover{
+    text-decoration: underline;
+}
+
+.span{
+    
+    color: rgba(38, 38, 38, 0.5);
+}

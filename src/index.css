@@ -75,3 +75,9 @@ button {
   padding: 0 32px 32px 32px;
   margin: 0 auto;
 }
+
+.containerMain{
+  width: 1280px;
+  padding: 70px 63px 80px 64px;
+  margin: 0 auto;
+}
