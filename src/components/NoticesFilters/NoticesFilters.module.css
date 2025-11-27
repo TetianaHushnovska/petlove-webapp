@@ -1,0 +1,61 @@
+.filterBox{
+    width: 100%;
+    padding: 40px;
+    border-radius: 30px;
+    background-color: #FFF4DF;
+    margin-bottom: 40px;
+}
+
+.firstRow,
+.secondRow{
+    border-bottom: 1px solid rgba(38, 38, 38, 0.1);
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.secondRow{
+    border: none;
+    padding: 20px 0 0 0;
+}
+
+.select,
+.citySelect{
+    height: 48px;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    background-color: #fff;
+    padding: 14px;
+}
+
+.categories{
+    width: 200px;
+}
+
+.gender,
+.type{
+    width: 190px;
+}
+
+.citySelect{
+    width: 227px;
+}
+
+.resetBtn{
+    height: 48px;
+    background-color: #F6B83D;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 30px;
+    padding: 14px 20px;
+    line-height: 20px;
+    color: #fff;
+    margin-top: 18px;
+    transition: background-color 0.3ms ease-in-out;
+}
+
+.resetBtn:hover{
+    background-color: #FBE7C1;
+}

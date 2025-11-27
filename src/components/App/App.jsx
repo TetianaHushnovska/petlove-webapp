@@ -9,6 +9,7 @@ import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import NewsPage from "../../pages/NewsPage/NewsPage";
 import FriendsPage from "../../pages/FriendsPage/FriendsPage";
+import NoticesPage from "../../pages/NoticesPage/NoticesPage";
 
 function App() {
   const location = useLocation();
@@ -34,7 +35,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="news" element={<NewsPage />} />
         <Route path="friends" element={<FriendsPage />} />
-        {/* {/* <Route path="notices" element={<NoticesPage />} /> */}
+        <Route path="notices" element={<NoticesPage />} />
 
         {/* Private routes */}
         <Route

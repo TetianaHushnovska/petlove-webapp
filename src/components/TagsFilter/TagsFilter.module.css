@@ -1,0 +1,39 @@
+.tagsRow {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.tag {
+    display: flex;
+    flex-direction: row;
+    gap: 12.5px;
+    align-items: center;
+    padding: 14px;
+    border-radius: 30px;
+    background: #ffffff;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    color: #262626;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tag:hover {
+    background: #FBE7C1;
+}
+
+.active {
+    background: #f6b83d;
+    color: #fff;
+}
+
+.icon{
+    display: block;
+    width: 9px;
+    height: 9px;
+    --color2: #fff;
+}

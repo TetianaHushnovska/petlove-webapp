@@ -1,8 +1,8 @@
 import css from "./Pagination.module.css";
 import { getPages } from "../../utils";
 
-export default function Pagination({ page, total, limit, onPageChange }) {
-  const totalPages = Math.ceil(total / limit);
+export default function Pagination({ page, total, onPageChange }) {
+  const totalPages = total;
   if (totalPages <= 1) return null;
 
   const pages = getPages(page, totalPages);
