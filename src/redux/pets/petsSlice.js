@@ -1,5 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPets, fetchCategories, fetchGenders, fetchTypes } from "./petsOperations";
+import {
+    fetchPets,
+    fetchCategories,
+    fetchGenders,
+    fetchTypes,
+    fetchNoticeById,
+    addFavorite,
+    removeFavorite,
+    fetchFavoriteList
+} from "./petsOperations";
 import { fetchAvailableCities } from "../locations/locationsOperations";
 
 const initialState = {
@@ -20,6 +29,9 @@ const initialState = {
     typesList: [],
     locationsList: [],
 
+    favoriteIds: [],
+
+    currentNotice: null,
     isLoading: false,
     error: null,
 };
@@ -47,13 +59,12 @@ const petsSlice = createSlice({
             state.location = "";
             state.sort = "";
             state.page = 1;
-            state.totalPages = 0; // важливо!
+            state.totalPages = 0;
         }
     },
 
     extraReducers: builder => {
         builder
-
             .addCase(fetchPets.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
@@ -62,35 +73,12 @@ const petsSlice = createSlice({
             .addCase(fetchPets.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
 
-                // Копіюємо масив
-                let items = [...payload.items];
-
-                // apply local sorting
-                switch (state.sort) {
-                    case "price:asc":
-                        items.sort((a, b) => a.price - b.price);
-                        break;
-
-                    case "price:desc":
-                        items.sort((a, b) => b.price - a.price);
-                        break;
-
-                    case "popularity:asc":
-                        items.sort((a, b) => a.popularity - b.popularity);
-                        break;
-
-                    case "popularity:desc":
-                        items.sort((a, b) => b.popularity - a.popularity);
-                        break;
-
-                    default:
-                        break;
-                }
-
-                state.items = items;
+                // ❗ НЕ створюємо новий масив — React тепер не оновлює весь список
+                state.items = payload.items;
                 state.totalPages = payload.totalPages;
                 state.page = payload.page;
             })
+
             .addCase(fetchPets.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
@@ -110,6 +98,34 @@ const petsSlice = createSlice({
 
             .addCase(fetchAvailableCities.fulfilled, (state, { payload }) => {
                 state.locationsList = payload;
+            })
+
+            .addCase(fetchNoticeById.pending, (state) => {
+                state.currentNotice = null;
+                state.isLoading = true;
+            })
+
+            .addCase(fetchNoticeById.fulfilled, (state, { payload }) => {
+                state.isLoading = false;
+                state.currentNotice = payload;
+            })
+
+            .addCase(fetchNoticeById.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+
+            // ⭐ favorites: завжди масив ID
+            .addCase(fetchFavoriteList.fulfilled, (state, { payload }) => {
+                state.favoriteIds = payload;
+            })
+
+            .addCase(addFavorite.fulfilled, (state, { payload }) => {
+                state.favoriteIds = payload;
+            })
+
+            .addCase(removeFavorite.fulfilled, (state, { payload }) => {
+                state.favoriteIds = payload;
             });
     }
 });

@@ -1,0 +1,96 @@
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 17, 17, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal {
+    position: relative;
+    width: 466px;
+    padding: 60px;
+    background: #fff;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.closeBtn {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.icon{
+    width: 12px;
+    height: 12px;
+    --color2: #262626;
+}
+
+.img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #FFF4DF;
+    font-size: 44px;
+    text-align: center;
+    line-height: 80px;
+    margin: 0 auto 20px auto;
+}
+
+.title{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.03em;
+    color: #F6B83D;
+    margin-bottom: 20px;
+}
+
+.text{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+}
+
+.btnWrap{
+    display: flex;
+    flex-direction: row;
+    padding: 0 29px;
+    justify-content: space-between;
+}
+
+.login,
+.register{
+    width: 140px;
+    height: 48px;
+    font-weight: 700;
+    line-height: 48px;
+    letter-spacing: -0.03em;
+    color: #fff;
+    background-color: #F6B83D;
+    border-radius: 30px;
+    transition: background-color 0.3ms ease-in-out;
+}
+
+.register{
+    color: #F6B83D;
+    background-color: #FFF4DF;
+}
+
+.login:hover{
+    background-color: #F9B020;
+}
+
+.register:hover{
+    background-color: #FBE7C1;
+}

@@ -13,6 +13,8 @@ import {
 } from "../../redux/locations/locationsSelectors";
 
 import { clearSearchResults } from "../../redux/locations/locationsSlice";
+
+// ❗ ВАЖЛИВО → беремо локейшн з P E T S slice
 import { setLocation } from "../../redux/pets/petsSlice";
 
 export default function CitySelect() {
@@ -30,53 +32,29 @@ export default function CitySelect() {
     dispatch(fetchAvailableCities());
   }, [dispatch]);
 
-  /**
-   * 🔥 Search results НЕ містять _id
-   * Тому ми шукаємо відповідність у availableCities
-   * і повертаємо місто з _id, або fallback
-   */
-  const mergedList =
-    value.length >= 3
-      ? results.map((res) => {
-          const searchName = (res.cityEn || "").toLowerCase();
-
-          const match = available.find(
-            (a) => (a.city || "").toLowerCase() === searchName
-          );
-
-          return match
-            ? match
-            : {
-                _id: null,
-                city: res.cityEn,
-                state: res.stateEn,
-              };
-        })
-      : available;
+  const list = value.length >= 3 ? results : available;
 
   const handleChange = (e) => {
     const val = e.target.value;
     setValue(val);
     setShowList(true);
 
-    if (val.length >= 3) {
-      dispatch(searchCities(val));
-    } else {
-      dispatch(clearSearchResults());
-    }
+    if (val.length >= 3) dispatch(searchCities(val));
+    else dispatch(clearSearchResults());
   };
 
-  /**
-   * 🔥 Найважливіше: передаємо в бекенд НАЗВУ міста
-   * а не _id, бо API фільтрує тільки за cityName
-   */
   const handleSelect = (city) => {
-    const cityName = city.city || city.cityEn || "";
-    console.log("Selected city:", cityName);
-    setValue(cityName);
+    setValue(city.cityEn);
     setShowList(false);
 
-    dispatch(setLocation(cityName)); // передаємо назву міста
+    dispatch(setLocation(city._id));
+  };
+
+  const handleSearchClick = () => {
+    if (value.length >= 3) {
+      dispatch(searchCities(value));
+      setShowList(true);
+    }
   };
 
   const clearField = () => {
@@ -85,15 +63,14 @@ export default function CitySelect() {
     dispatch(clearSearchResults());
   };
 
-  // close dropdown on outside click
   useEffect(() => {
     const close = (e) => {
       if (boxRef.current && !boxRef.current.contains(e.target)) {
         setShowList(false);
       }
     };
-    document.addEventListener("click", close);
-    return () => document.removeEventListener("click", close);
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
   }, []);
 
   return (
@@ -114,29 +91,29 @@ export default function CitySelect() {
           </button>
         )}
 
-        <button type="button" className={css.searchBtn}>
+        <button
+          type="button"
+          className={css.searchBtn}
+          onClick={handleSearchClick}
+        >
           <svg className={css.iconSearch}>
             <use href="/icons.svg#icon-search" />
           </svg>
         </button>
       </div>
 
-      {showList && value.length >= 1 && mergedList.length > 0 && (
+      {showList && (
         <ul className={css.dropdown}>
-          {mergedList.map((c, index) => {
-            const cityName = c.city || c.cityEn || "";
-            const stateName = c.state || c.stateEn || "";
-
-            return (
-              <li
-                key={c._id || `${cityName}-${index}`} // 🔥 гарантовано унікальний ключ
-                onClick={() => handleSelect(c)}
-              >
-                <b>{cityName.slice(0, value.length)}</b>
-                {cityName.slice(value.length)}, {stateName}
+          {list.length === 0 ? (
+            <li>No results</li>
+          ) : (
+            list.map((c) => (
+              <li key={c._id} onClick={() => handleSelect(c)}>
+                <b>{c.cityEn.slice(0, value.length)}</b>
+                {c.cityEn.slice(value.length)}, {c.stateEn}
               </li>
-            );
-          })}
+            ))
+          )}
         </ul>
       )}
     </div>

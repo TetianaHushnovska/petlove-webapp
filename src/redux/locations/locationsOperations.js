@@ -9,7 +9,7 @@ export const fetchAvailableCities = createAsyncThunk(
     "locations/fetchAvailable",
     async (_, thunkAPI) => {
         try {
-            const { data } = await api.get("/locations");
+            const { data } = await api.get("/cities/locations");
             return data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
@@ -22,7 +22,7 @@ export const searchCities = createAsyncThunk(
     async (keyword, thunkAPI) => {
         if (!keyword || keyword.length < 3) return [];
         try {
-            const { data } = await api.get("/locations", {
+            const { data } = await api.get("/cities", {
                 params: { keyword }
             });
             return data;
@@ -31,4 +31,3 @@ export const searchCities = createAsyncThunk(
         }
     }
 );
-

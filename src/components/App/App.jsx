@@ -1,19 +1,46 @@
 import { Navigate, Route, Routes, useLocation } from "react-router";
-import HomePage from "../../pages/HomePage/HomePage";
-import { Layout } from "../Layout/Layout";
-import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import "./App.css";
+
+import HomePage from "../../pages/HomePage/HomePage";
+import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
-import ProfilePage from "../../pages/ProfilePage/ProfilePage";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import NewsPage from "../../pages/NewsPage/NewsPage";
 import FriendsPage from "../../pages/FriendsPage/FriendsPage";
 import NoticesPage from "../../pages/NoticesPage/NoticesPage";
+import ProfilePage from "../../pages/ProfilePage/ProfilePage";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import { Layout } from "../Layout/Layout";
+
+import { refreshUser } from "../../redux/auth/authOperations";
+import { fetchFavoriteList } from "../../redux/pets/petsOperations";
 
 function App() {
   const location = useLocation();
+  const dispatch = useDispatch();
 
+  const token = useSelector((state) => state.auth.token);
+  const isRefreshing = useSelector((state) => state.auth.isRefreshing);
+
+  // 🔥 1. Refresh user after reload (if token exists)
+  useEffect(() => {
+    if (token) {
+      console.log("🔄 REFRESH USER START");
+      dispatch(refreshUser());
+    }
+  }, [token, dispatch]);
+
+  // 🔥 2. Load favorites ONLY after refreshUser is done AND token exists
+  useEffect(() => {
+    if (!isRefreshing && token) {
+      console.log("⭐ LOAD FAVORITES NOW");
+      dispatch(fetchFavoriteList());
+    }
+  }, [isRefreshing, token, dispatch]);
+
+  // Background color logic
   useEffect(() => {
     if (location.pathname === "/register" || location.pathname === "/login") {
       document.body.classList.add("white-bg");
@@ -23,21 +50,21 @@ function App() {
       document.body.classList.remove("white-bg");
     }
   }, [location]);
+
+  if (isRefreshing) return null;
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        {/* Redirect from "/" → "/home" */}
         <Route index element={<Navigate to="/home" replace />} />
 
-        {/* Pages */}
         <Route path="home" element={<HomePage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="login" element={<LoginPage />} />
         <Route path="news" element={<NewsPage />} />
         <Route path="friends" element={<FriendsPage />} />
         <Route path="notices" element={<NoticesPage />} />
 
-        {/* Private routes */}
         <Route
           path="profile"
           element={

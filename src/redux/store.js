@@ -17,19 +17,26 @@ import {
 } from "redux-persist";
 
 import storage from "redux-persist/lib/storage";
+import { api } from "./auth/authOperations";
 
 const authPersistConfig = {
     key: "auth",
     storage,
-    whitelist: ["token", "refreshToken"],
+    whitelist: ["token", "user"], // refreshToken removed — backend doesn't use it
+};
+
+const petsPersistConfig = {
+    key: "pets",
+    storage,
+    whitelist: ["favoriteIds"], // ❤️ persist favorites
 };
 
 const store = configureStore({
     reducer: {
         auth: persistReducer(authPersistConfig, authReducer),
+        pets: persistReducer(petsPersistConfig, petsReducer),
         news: newsReducer,
         friends: friendsReducer,
-        pets: petsReducer,
         locations: locationsReducer,
     },
 
@@ -39,6 +46,22 @@ const store = configureStore({
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         }),
+});
+
+// Set token on initial load
+const { token } = store.getState().auth;
+if (token) {
+    api.defaults.headers.common.Authorization = `Bearer ${token}`;
+}
+
+// Keep token updated
+store.subscribe(() => {
+    const token = store.getState().auth.token;
+    if (token) {
+        api.defaults.headers.common.Authorization = `Bearer ${token}`;
+    } else {
+        delete api.defaults.headers.common.Authorization;
+    }
 });
 
 export const persistor = persistStore(store);

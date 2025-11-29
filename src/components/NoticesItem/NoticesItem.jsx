@@ -1,7 +1,43 @@
-import { formatDate, safeValue } from "../../utils/formatValue";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+
 import css from "./NoticesItem.module.css";
 
+import { selectIsLoggedIn } from "../../redux/auth/authSelector";
+import { selectFavoriteIds } from "../../redux/pets/petsSelectors";
+
+import { addFavorite, removeFavorite } from "../../redux/pets/petsOperations";
+
+import { formatDate, safeValue } from "../../utils/formatValue";
+
+import ModalAttention from "../ModalAttention/ModalAttention";
+import ModalNotice from "../ModalNotice/ModalNotice";
+
 export default function NoticesItem({ item }) {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const favoriteIds = useSelector(selectFavoriteIds);
+
+  const isFav = favoriteIds.includes(item._id);
+
+  const [showAttention, setShowAttention] = useState(false);
+  const [showNotice, setShowNotice] = useState(false);
+
+  const handleLearnMore = () => {
+    if (!isLoggedIn) setShowAttention(true);
+    else setShowNotice(true);
+  };
+
+  const handleFavorite = () => {
+    if (!isLoggedIn) {
+      setShowAttention(true);
+      return;
+    }
+
+    if (isFav) dispatch(removeFavorite(item._id));
+    else dispatch(addFavorite(item._id));
+  };
+
   return (
     <div className={css.card}>
       <img src={item.imgURL} alt={item.title} className={css.img} />
@@ -21,18 +57,22 @@ export default function NoticesItem({ item }) {
           <p className={css.param}>Name</p>
           <p className={css.paramDetail}>{safeValue(item.name)}</p>
         </div>
+
         <div className={css.box}>
           <p className={css.param}>Birthday</p>
           <p className={css.paramDetail}>{formatDate(item.birthday)}</p>
         </div>
+
         <div className={css.box}>
           <p className={css.param}>Sex</p>
           <p className={css.paramDetail}>{safeValue(item.sex)}</p>
         </div>
+
         <div className={css.box}>
           <p className={css.param}>Species</p>
           <p className={css.paramDetail}>{safeValue(item.species)}</p>
         </div>
+
         <div className={css.box}>
           <p className={css.param}>Category</p>
           <p className={css.paramDetail}>{safeValue(item.category)}</p>
@@ -44,16 +84,24 @@ export default function NoticesItem({ item }) {
       <p className={css.price}>{item.price ? `$${item.price}` : "No price"}</p>
 
       <div className={css.btnWrap}>
-        <button type="button" className={css.moreBtn}>
+        <button className={css.moreBtn} onClick={handleLearnMore}>
           Learn more
         </button>
 
-        <button type="button" className={css.favBtn}>
+        <button className={css.favBtn} onClick={handleFavorite}>
           <svg className={css.icon}>
-            <use href="/icons.svg#icon-fav" />
+            <use href={`/icons.svg#${isFav ? "icon-trash" : "icon-fav"}`} />
           </svg>
         </button>
       </div>
+
+      {showAttention && (
+        <ModalAttention onClose={() => setShowAttention(false)} />
+      )}
+
+      {isLoggedIn && showNotice && (
+        <ModalNotice id={item._id} onClose={() => setShowNotice(false)} />
+      )}
     </div>
   );
 }

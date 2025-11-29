@@ -42,6 +42,7 @@ export default function NoticesPage() {
   const location = useSelector(selectPetsLocation);
   const sort = useSelector(selectPetsSort);
 
+  // Load dictionaries
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchGenders());
@@ -49,6 +50,7 @@ export default function NoticesPage() {
     dispatch(fetchAvailableCities());
   }, [dispatch]);
 
+  // ❗ Load pets ONLY when filters change — НЕ коли клікаєш favorite
   useEffect(() => {
     dispatch(fetchPets());
   }, [dispatch, page, search, category, gender, type, location, sort]);

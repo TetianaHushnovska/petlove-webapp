@@ -5,7 +5,7 @@ export default function NewsList({ items }) {
   return (
     <ul className={css.listWrap}>
       {items.map((item) => (
-        <li key={item.id}>
+        <li key={item._id}>
           <NewsItems item={item} />
         </li>
       ))}

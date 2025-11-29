@@ -32,3 +32,5 @@ export const selectAreFiltersActive = (state) => {
         p.sort
     );
 };
+
+export const selectFavoriteIds = (state) => state.pets.favoriteIds;

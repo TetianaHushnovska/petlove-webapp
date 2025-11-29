@@ -5,11 +5,11 @@ export const api = axios.create({
     baseURL: "https://petlove.b.goit.study/api",
 });
 
-const setToken = (token) => {
+export const setToken = (token) => {
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
 
-const clearToken = () => {
+export const clearToken = () => {
     delete api.defaults.headers.common.Authorization;
 }
 
@@ -62,19 +62,20 @@ export const refreshUser = createAsyncThunk(
     "auth/refresh",
     async (_, thunkAPI) => {
         const state = thunkAPI.getState();
-        const refreshToken = state.auth.refreshToken;
+        const token = state.auth.token;
 
-        if (!refreshToken) return thunkAPI.rejectWithValue("No refresh token");
+        if (!token) {
+            return thunkAPI.rejectWithValue("No token");
+        }
 
         try {
-            api.defaults.headers.common.Authorization = `Bearer ${refreshToken}`;
+            api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-            const response = await api.post("/users/refresh");
-            setToken(response.data.token);
+            const { data } = await api.get("/users/current");
+            return data;
 
-            return response.data;
-        } catch (err) {
-            return thunkAPI.rejectWithValue("Session expired");
+        } catch (error) {
+            return thunkAPI.rejectWithValue("Unauthorized");
         }
     }
-)
+);
