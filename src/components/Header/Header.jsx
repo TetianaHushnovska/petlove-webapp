@@ -4,7 +4,7 @@ import Nav from "../Nav/Nav";
 import AuthNav from "../AuthNav/AutnNav";
 import { useLocation } from "react-router";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../../redux/auth/authSelector";
+import { selectIsLoggedIn } from "../../redux/auth/authSelectors";
 import UserNav from "../UserNav/UserNav";
 
 export default function Header() {

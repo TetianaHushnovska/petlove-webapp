@@ -1,0 +1,29 @@
+.editBtn{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #FFF4DF;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    transition: background-color 0.3ms ease-in-out;
+}
+
+.icon{
+    width: 18px;
+    height: 18px;
+}
+
+.upload {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.editBtn:hover{
+background-color: #FBE7C1;
+}

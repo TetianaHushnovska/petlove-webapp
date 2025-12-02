@@ -1,19 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+    addFavorite,
+    fetchCurrentUser,
     loginUser,
     logoutUser,
     refreshUser,
     registerUser,
+    removeFavorite,
+    updateUser,
+    uploadAvatar,
 } from "./authOperations";
 
 const initialState = {
     user: {
+        _id: null,
         name: null,
         email: null,
-        avatarURL: null,
+        avatar: null,
+        phone: null,
+
+        pets: [],
+        noticesFavorites: [],
+        noticesViewed: [],
     },
+
     token: null,
     refreshToken: null,
+
     isLoggedIn: false,
     isRefreshing: false,
     isLoading: false,
@@ -23,9 +36,10 @@ const initialState = {
 const authSlice = createSlice({
     name: "auth",
     initialState,
+
     extraReducers: (builder) => {
         builder
-            // Register
+            //Register user
             .addCase(registerUser.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
@@ -34,9 +48,12 @@ const authSlice = createSlice({
                 state.isLoading = false;
 
                 state.user = {
+                    ...state.user,
                     name: payload.user.name,
                     email: payload.user.email,
-                    avatarURL: null
+
+                    avatar: payload.user.avatarURL ?? state.user.avatar,
+                    phone: payload.user.phone ?? state.user.phone,
                 };
 
                 state.token = payload.token;
@@ -48,7 +65,7 @@ const authSlice = createSlice({
                 state.error = action.payload;
             })
 
-            // Login
+            //Log in
             .addCase(loginUser.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
@@ -57,9 +74,12 @@ const authSlice = createSlice({
                 state.isLoading = false;
 
                 state.user = {
+                    ...state.user,
                     name: payload.name,
                     email: payload.email,
-                    avatarURL: null
+
+                    avatar: payload.avatarURL ?? state.user.avatar,
+                    phone: payload.phone ?? state.user.phone,
                 };
 
                 state.token = payload.token;
@@ -71,29 +91,95 @@ const authSlice = createSlice({
                 state.error = action.payload;
             })
 
-            // Refresh user
+            //Refresh user
             .addCase(refreshUser.pending, (state) => {
                 state.isRefreshing = true;
             })
             .addCase(refreshUser.fulfilled, (state, { payload }) => {
                 state.isRefreshing = false;
+                state.isLoggedIn = true;
 
                 state.user = {
+                    ...state.user,
+                    _id: payload._id,
                     name: payload.name,
                     email: payload.email,
-                    avatarURL: payload.avatarURL || null
+
+                    avatar: payload.avatar ?? state.user.avatar,
+                    phone: payload.phone ?? state.user.phone,
+
+                    pets: payload.pets ?? state.user.pets,
+                    noticesFavorites: payload.noticesFavorites ?? state.user.noticesFavorites,
+                    noticesViewed: payload.noticesViewed ?? state.user.noticesViewed,
                 };
-
-                state.isLoggedIn = true;
             })
-
             .addCase(refreshUser.rejected, (state) => {
                 state.isRefreshing = false;
             })
 
-            // Logout
-            .addCase(logoutUser.fulfilled, () => {
-                return { ...initialState };
+            //Log out
+            .addCase(logoutUser.fulfilled, () => ({
+                ...initialState,
+            }))
+
+            //Fetch current user
+            .addCase(fetchCurrentUser.pending, (state) => {
+                state.isRefreshing = true;
+            })
+            .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
+                state.isRefreshing = false;
+                state.isLoggedIn = true;
+
+                state.user = {
+                    ...state.user,
+                    _id: payload._id,
+                    name: payload.name,
+                    email: payload.email,
+
+                    avatar: payload.avatar ?? state.user.avatar,
+                    phone: payload.phone ?? state.user.phone,
+
+                    pets: payload.pets ?? state.user.pets,
+                    noticesFavorites: payload.noticesFavorites ?? state.user.noticesFavorites,
+                    noticesViewed: payload.noticesViewed ?? state.user.noticesViewed,
+                };
+            })
+            .addCase(fetchCurrentUser.rejected, (state, action) => {
+                state.isRefreshing = false;
+                state.error = action.payload;
+                state.isLoggedIn = false;
+                state.token = null;
+            })
+
+            //Update user
+            .addCase(updateUser.fulfilled, (state, { payload }) => {
+                state.user = {
+                    ...state.user,
+                    name: payload.name ?? state.user.name,
+                    email: payload.email ?? state.user.email,
+
+                    phone: payload.phone ?? state.user.phone,
+                    avatar:
+                        payload.avatar ??
+                        payload.avatarURL ??
+                        state.user.avatar,
+                };
+            })
+            .addCase(updateUser.rejected, (state, action) => {
+                state.error = action.payload;
+            })
+
+            //Favorites
+            .addCase(addFavorite.fulfilled, (state, { payload }) => {
+                state.user.noticesFavorites = payload;
+            })
+            .addCase(removeFavorite.fulfilled, (state, { payload }) => {
+                state.user.noticesFavorites = payload;
+            })
+
+            //Upload avatar
+            .addCase(uploadAvatar.fulfilled, (state, { payload }) => {
+                state.user.avatar = payload.avatarURL ?? payload.avatar;
             });
     },
 });

@@ -1,5 +1,11 @@
 // import css from './ProfilePage.module.css'
 
+import UserCard from "../../components/UserCard/UserCard";
+
 export default function ProfilePage() {
-  return <p>Profile page</p>;
+  return (
+    <main className="container">
+      <UserCard />
+    </main>
+  );
 }

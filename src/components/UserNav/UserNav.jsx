@@ -9,7 +9,7 @@ export default function UserNav() {
 
   return (
     <div className={css.wrap}>
-      <LogOutBtn openModal={() => setIsModalOpen(true)} />
+      <LogOutBtn openModal={() => setIsModalOpen(true)} mode="nav" />
       <UserBar />
 
       {isModalOpen && (

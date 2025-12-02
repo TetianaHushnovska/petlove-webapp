@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import css from "./UserBar.module.css";
-import { selectUser } from "../../redux/auth/authSelector";
+import { selectUser } from "../../redux/auth/authSelectors";
 import { useLocation, useNavigate } from "react-router";
 
 export default function UserBar() {
@@ -15,8 +15,8 @@ export default function UserBar() {
 
   return (
     <div className={css.wrap} onClick={handleClick}>
-      {user.avatarURL ? (
-        <img src={user.avatarURL} alt="User avatar" className={css.avatar} />
+      {user.avatar ? (
+        <img src={user.avatar} alt="User avatar" className={css.avatar} />
       ) : (
         <svg className={css.icon}>
           <use href="/icons.svg#icon-profile" />

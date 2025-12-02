@@ -23,3 +23,21 @@
 .btnHome:hover{
     background-color: #F9B020;
 }
+
+.btnLog{
+    width: 136px;
+    height: 50px;
+    border-radius: 30px;
+    outline: none;
+    background-color: #FFF4DF;
+    color: #F6B83D;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    transition: background-color 0.3ms ease-in-out
+}
+
+.btnLog:hover{
+    background-color: #FBE7C1;
+}

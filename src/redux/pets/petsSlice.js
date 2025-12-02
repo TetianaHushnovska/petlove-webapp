@@ -5,9 +5,6 @@ import {
     fetchGenders,
     fetchTypes,
     fetchNoticeById,
-    addFavorite,
-    removeFavorite,
-    fetchFavoriteList
 } from "./petsOperations";
 import { fetchAvailableCities } from "../locations/locationsOperations";
 
@@ -28,8 +25,6 @@ const initialState = {
     gendersList: [],
     typesList: [],
     locationsList: [],
-
-    favoriteIds: [],
 
     currentNotice: null,
     isLoading: false,
@@ -73,7 +68,6 @@ const petsSlice = createSlice({
             .addCase(fetchPets.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
 
-                // ❗ НЕ створюємо новий масив — React тепер не оновлює весь список
                 state.items = payload.items;
                 state.totalPages = payload.totalPages;
                 state.page = payload.page;
@@ -114,19 +108,6 @@ const petsSlice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload;
             })
-
-            // ⭐ favorites: завжди масив ID
-            .addCase(fetchFavoriteList.fulfilled, (state, { payload }) => {
-                state.favoriteIds = payload;
-            })
-
-            .addCase(addFavorite.fulfilled, (state, { payload }) => {
-                state.favoriteIds = payload;
-            })
-
-            .addCase(removeFavorite.fulfilled, (state, { payload }) => {
-                state.favoriteIds = payload;
-            });
     }
 });
 

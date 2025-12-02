@@ -15,7 +15,6 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { Layout } from "../Layout/Layout";
 
 import { refreshUser } from "../../redux/auth/authOperations";
-import { fetchFavoriteList } from "../../redux/pets/petsOperations";
 
 function App() {
   const location = useLocation();
@@ -27,18 +26,9 @@ function App() {
   // 🔥 1. Refresh user after reload (if token exists)
   useEffect(() => {
     if (token) {
-      console.log("🔄 REFRESH USER START");
       dispatch(refreshUser());
     }
   }, [token, dispatch]);
-
-  // 🔥 2. Load favorites ONLY after refreshUser is done AND token exists
-  useEffect(() => {
-    if (!isRefreshing && token) {
-      console.log("⭐ LOAD FAVORITES NOW");
-      dispatch(fetchFavoriteList());
-    }
-  }, [isRefreshing, token, dispatch]);
 
   // Background color logic
   useEffect(() => {

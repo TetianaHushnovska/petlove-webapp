@@ -2,21 +2,19 @@ import { useEffect } from "react";
 import css from "./ModalNotice.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  fetchNoticeById,
-  addFavorite,
-  removeFavorite,
-} from "../../redux/pets/petsOperations";
+import { fetchNoticeById } from "../../redux/pets/petsOperations";
 
-import { selectFavoriteIds } from "../../redux/pets/petsSelectors";
+import { addFavorite, removeFavorite } from "../../redux/auth/authOperations";
+import { selectFavorites } from "../../redux/auth/authSelectors";
+
 import { safeValue, formatDate } from "../../utils/formatValue";
 
 export default function ModalNotice({ id, onClose }) {
   const dispatch = useDispatch();
 
   const notice = useSelector((state) => state.pets.currentNotice);
-  const favoriteIds = useSelector(selectFavoriteIds);
-  const isFav = favoriteIds.includes(id);
+  const favorites = useSelector(selectFavorites);
+  const isFav = favorites.includes(id);
 
   useEffect(() => {
     dispatch(fetchNoticeById(id));
@@ -101,7 +99,6 @@ export default function ModalNotice({ id, onClose }) {
         </p>
 
         <div className={css.btnWrap}>
-          {/* ⭐ FAVORITE BUTTON */}
           <button
             type="button"
             className={css.addToFav}

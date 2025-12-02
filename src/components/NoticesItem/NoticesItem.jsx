@@ -3,10 +3,11 @@ import { useState } from "react";
 
 import css from "./NoticesItem.module.css";
 
-import { selectIsLoggedIn } from "../../redux/auth/authSelector";
-import { selectFavoriteIds } from "../../redux/pets/petsSelectors";
-
-import { addFavorite, removeFavorite } from "../../redux/pets/petsOperations";
+import {
+  selectIsLoggedIn,
+  selectFavorites,
+} from "../../redux/auth/authSelectors";
+import { addFavorite, removeFavorite } from "../../redux/auth/authOperations";
 
 import { formatDate, safeValue } from "../../utils/formatValue";
 
@@ -15,10 +16,10 @@ import ModalNotice from "../ModalNotice/ModalNotice";
 
 export default function NoticesItem({ item }) {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const favoriteIds = useSelector(selectFavoriteIds);
 
-  const isFav = favoriteIds.includes(item._id);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const favorites = useSelector(selectFavorites);
+  const isFav = favorites.includes(item._id);
 
   const [showAttention, setShowAttention] = useState(false);
   const [showNotice, setShowNotice] = useState(false);
@@ -44,6 +45,7 @@ export default function NoticesItem({ item }) {
 
       <div className={css.titleWrap}>
         <p className={css.title}>{safeValue(item.title)}</p>
+
         <div className={css.rating}>
           <svg className={css.icon}>
             <use href="/icons.svg#icon-star" />

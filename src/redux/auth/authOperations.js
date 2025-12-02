@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const api = axios.create({
     baseURL: "https://petlove.b.goit.study/api",
+    withCredentials: false,
 });
 
 export const setToken = (token) => {
@@ -12,6 +13,8 @@ export const setToken = (token) => {
 export const clearToken = () => {
     delete api.defaults.headers.common.Authorization;
 }
+
+
 
 // Register
 export const registerUser = createAsyncThunk(
@@ -71,11 +74,82 @@ export const refreshUser = createAsyncThunk(
         try {
             api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
-            const { data } = await api.get("/users/current");
+            const { data } = await api.get("/users/current/full");
             return data;
 
         } catch (error) {
             return thunkAPI.rejectWithValue("Unauthorized");
+        }
+    }
+);
+
+//Update user
+export const updateUser = createAsyncThunk(
+    "auth/updateUser",
+    async (data, thunkAPI) => {
+        try {
+            const res = await api.patch("/users/current/edit", data);
+            return res.data;
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err.response?.data || err.message);
+        }
+    }
+);
+
+//Fetch current user
+export const fetchCurrentUser = createAsyncThunk(
+    "auth/fetchCurrentUser",
+    async (_, thunkAPI) => {
+        try {
+            const { data } = await api.get("/users/current/full");
+            return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+
+//Add favorite
+export const addFavorite = createAsyncThunk(
+    "auth/addFavorite",
+    async (id, thunkAPI) => {
+        try {
+            const { data } = await api.post(`/notices/favorites/add/${id}`);
+            return data;
+        } catch (error) {
+            if (error.response?.status === 409) {
+                return thunkAPI.fulfillWithValue(
+                    thunkAPI.getState().auth.user.noticesFavorites
+                );
+            }
+
+            return thunkAPI.rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
+
+//Remove favorite
+export const removeFavorite = createAsyncThunk(
+    "auth/removeFavorite",
+    async (id, thunkAPI) => {
+        try {
+            const { data } = await api.delete(`/notices/favorites/remove/${id}`);
+            return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
+
+//Upload avatar
+export const uploadAvatar = createAsyncThunk(
+    "auth/uploadAvatar",
+    async (formData, thunkAPI) => {
+        try {
+            const { data } = await api.patch("/users/avatar", formData);
+            return data;
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err.response?.data || err.message);
         }
     }
 );
