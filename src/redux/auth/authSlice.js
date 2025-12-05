@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
     addFavorite,
+    addPet,
+    deletePet,
     fetchCurrentUser,
     loginUser,
     logoutUser,
@@ -180,7 +182,31 @@ const authSlice = createSlice({
             //Upload avatar
             .addCase(uploadAvatar.fulfilled, (state, { payload }) => {
                 state.user.avatar = payload.avatarURL ?? payload.avatar;
+            })
+            //Add pet
+            .addCase(addPet.fulfilled, (state, { payload }) => {
+                state.user.pets = payload;
+            })
+            .addCase(addPet.rejected, (state, action) => {
+                state.error = action.payload;
+            })
+            //Delete pet
+            .addCase(deletePet.fulfilled, (state, { payload }) => {
+                state.user = {
+                    ...state.user,
+                    pets: payload.pets,
+                    noticesFavorites: payload.noticesFavorites,
+                    noticesViewed: payload.noticesViewed,
+                    name: payload.name,
+                    email: payload.email,
+                    avatar: payload.avatar,
+                    phone: payload.phone,
+                };
+            })
+            .addCase(deletePet.rejected, (state, action) => {
+                state.error = action.payload;
             });
+
     },
 });
 

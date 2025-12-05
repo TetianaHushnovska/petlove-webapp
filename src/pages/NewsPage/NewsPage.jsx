@@ -4,7 +4,6 @@ import Title from "../../components/Title/Title";
 import {
   selectNews,
   selectNewsKeyword,
-  selectNewsLoading,
   selectNewsPage,
   selectNewsTotal,
 } from "../../redux/news/newsSelectors";
@@ -52,6 +51,7 @@ export default function NewsPage() {
           value={localValue}
           onChange={setLocalValue}
           onSubmit={handleSearchSubmit}
+          variant="news"
         />
       </div>
 

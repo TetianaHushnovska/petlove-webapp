@@ -4,6 +4,7 @@ import newsReducer from "./news/newsSlice";
 import friendsReducer from "./friends/friendsSlice";
 import petsReducer from "./pets/petsSlice";
 import locationsReducer from "./locations/locationsSlice";
+import favoritesReducer from './favorites/favoritesSlice';
 
 import {
     persistStore,
@@ -22,22 +23,23 @@ import { api } from "./auth/authOperations";
 const authPersistConfig = {
     key: "auth",
     storage,
-    whitelist: ["token", "user"], // refreshToken removed — backend doesn't use it
+    whitelist: ["token", "user"],
 };
 
-const petsPersistConfig = {
-    key: "pets",
+const favoritesPersistConfig = {
+    key: "favorites",
     storage,
-    whitelist: ["favoriteIds"], // ❤️ persist favorites
+    whitelist: ["favorites", "viewed"],
 };
 
 const store = configureStore({
     reducer: {
         auth: persistReducer(authPersistConfig, authReducer),
-        pets: persistReducer(petsPersistConfig, petsReducer),
+        pets: petsReducer,
         news: newsReducer,
         friends: friendsReducer,
         locations: locationsReducer,
+        favorites: persistReducer(favoritesPersistConfig, favoritesReducer),
     },
 
     middleware: (getDefaultMiddleware) =>

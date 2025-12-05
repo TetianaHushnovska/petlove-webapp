@@ -46,3 +46,33 @@ export const editUserSchema = yup.object().shape({
         .matches(/^\+38\d{10}$/, "Phone must be in format +380XXXXXXXXX")
         .nullable()
 });
+
+
+export const addPetSchema = yup.object().shape({
+    title: yup
+        .string()
+        .required("Title is required"),
+
+    name: yup
+        .string()
+        .required("Pet name is required"),
+
+    imgUrl: yup
+        .string()
+        .required("Image URL is required")
+        .matches(
+            /^https?:\/\/.*\.(png|jpg|jpeg|gif|bmp|webp)$/i,
+            "URL must link to an image (png, jpg, jpeg, gif, bmp, webp)"
+        ),
+
+    species: yup
+        .string()
+        .required("Type of pet is required"),
+
+    birthday: yup
+        .string()
+        .required("Birthday is required")
+        .matches(/^\d{4}-\d{2}-\d{2}$/, "Birthday must be in format YYYY-MM-DD"),
+
+    sex: yup.string().nullable(),
+});

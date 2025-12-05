@@ -34,18 +34,35 @@ const initialState = {
 const petsSlice = createSlice({
     name: "pets",
     initialState,
-    reducers: {
-        setSearch(state, action) { state.search = action.payload; state.page = 1; },
-        setCategory(state, action) { state.category = action.payload; state.page = 1; },
-        setGender(state, action) { state.gender = action.payload; state.page = 1; },
-        setType(state, action) { state.type = action.payload; state.page = 1; },
-        setLocation(state, action) { state.location = action.payload; state.page = 1; },
-        setSort(state, action) { state.sort = action.payload; state.page = 1; },
 
+    reducers: {
+        setSearch(state, action) {
+            state.search = action.payload;
+            state.page = 1;
+        },
+        setCategory(state, action) {
+            state.category = action.payload;
+            state.page = 1;
+        },
+        setGender(state, action) {
+            state.gender = action.payload;
+            state.page = 1;
+        },
+        setType(state, action) {
+            state.type = action.payload;
+            state.page = 1;
+        },
+        setLocation(state, action) {
+            state.location = action.payload;
+            state.page = 1;
+        },
+        setSort(state, action) {
+            state.sort = action.payload;
+            state.page = 1;
+        },
         setPage(state, action) {
             state.page = action.payload;
         },
-
         resetFilters(state) {
             state.search = "";
             state.category = "";
@@ -55,60 +72,50 @@ const petsSlice = createSlice({
             state.sort = "";
             state.page = 1;
             state.totalPages = 0;
-        }
+        },
     },
 
-    extraReducers: builder => {
+    extraReducers: (builder) => {
         builder
             .addCase(fetchPets.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
             })
-
             .addCase(fetchPets.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
-
                 state.items = payload.items;
                 state.totalPages = payload.totalPages;
                 state.page = payload.page;
             })
-
             .addCase(fetchPets.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
             })
-
             .addCase(fetchCategories.fulfilled, (state, { payload }) => {
                 state.categoriesList = payload;
             })
-
             .addCase(fetchGenders.fulfilled, (state, { payload }) => {
                 state.gendersList = payload;
             })
-
             .addCase(fetchTypes.fulfilled, (state, { payload }) => {
                 state.typesList = payload;
             })
-
             .addCase(fetchAvailableCities.fulfilled, (state, { payload }) => {
                 state.locationsList = payload;
             })
-
             .addCase(fetchNoticeById.pending, (state) => {
                 state.currentNotice = null;
                 state.isLoading = true;
             })
-
             .addCase(fetchNoticeById.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
                 state.currentNotice = payload;
             })
-
             .addCase(fetchNoticeById.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
-            })
-    }
+            });
+    },
 });
 
 export const {

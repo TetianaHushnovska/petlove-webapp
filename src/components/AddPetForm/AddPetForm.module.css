@@ -1,0 +1,300 @@
+.form{
+    width: 592px;
+    height: 654px;
+    padding: 60px 80px;
+    background-color: #fff;
+    border-radius: 60px;
+    /* height: auto; */
+}
+
+.title{
+    letter-spacing: -0.03em;
+    margin-bottom: 40px;
+}
+
+.span{
+    font-size: 16px;
+    font-weight: 700;
+    color: #262626;
+    opacity: 40%;
+    letter-spacing: 0;
+}
+
+.imgCard{
+    width: 100%;
+    height: 86px;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.genderWrap{
+    width: 136px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    position: absolute;
+    left: 0;
+    top: -20px;
+}
+
+.genderBtn{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3ms ease-in-out;
+}
+
+.icon{
+    width: 10px;
+    height: 18px;
+}
+
+.male{
+    background-color: rgba(84, 173, 255, 0.1);
+}
+
+.male:hover{
+    background-color: #54ADFF;
+    --color1: #fff;
+}
+
+.male.active {
+    background-color: #54ADFF !important;
+}
+
+.male.active .icon {
+    --color1:#fff;
+}
+
+.female{
+    background-color: rgba(244, 63, 94, 0.1);
+}
+
+.female:hover{
+    background-color: #F43F5E;
+    --color2:#fff;
+}
+
+.female.active {
+    background-color: #F43F5E !important;
+}
+
+.female.active .icon {
+    --color2: #fff;
+}
+
+.gender{
+    background-color: rgba(255, 244, 223, 1);
+}
+
+.iconGender{
+    width: 18px;
+    height: 16px;
+}
+
+.gender:hover{
+    background-color: #F6B83D;
+    --color3: #fff;
+}
+
+.gender.active {
+    background-color: #F6B83D !important;
+}
+
+.gender.active .iconGender {
+    --color3:#fff;
+}
+
+.preview{
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.placeholder{
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    background-color: #FFF4DF;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pawIcon{
+    width: 33px;
+    height: 30px;
+}
+
+.urlRow{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.inputUrl{
+    width: 278px;
+    height: 42px;
+    outline: none;
+    border: 1px solid rgba(38, 38, 38, 0.15);
+    border-radius: 30px;
+    padding: 12px;
+    transition: border-color 0.3ms ease-in-out;
+    margin-bottom: 18px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+}
+
+.uploadBtn{
+    width: 146px;
+    height: 42px;
+    border-radius: 30px;
+    background-color: #FFF4DF;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3ms ease-in-out;
+}
+
+.iconUpload{
+    width: 18px;
+    height: 18px;
+}
+
+.uploadBtn:hover{
+    background-color: #FBE7C1;
+}
+
+.input{
+    width: 100%;
+    height: 52px;
+    border-radius: 30px;
+    outline: none;
+    border: 1px solid rgba(38, 38, 38, 0.15);
+    padding: 16px;
+    margin-bottom: 18px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+}
+
+.row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.dateWrapper {
+    width: 210px;
+    position: relative;
+}
+
+.dateInput {
+    width: 210px;
+    height: 52px;
+    padding: 16px;
+    border-radius: 30px;
+    border: 1px solid rgba(38, 38, 38, 0.15);
+    font-weight: 500;
+    outline: none;
+}
+
+.dateInput::placeholder {
+    color: rgba(38, 38, 38, 0.4);
+}
+
+.dateInput:hover {
+    border: 1px solid #F6B83D;
+}
+
+.iconCalendar {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    fill: transparent;
+    stroke: #262626;
+}
+
+.calendar {
+    border-radius: 20px !important;
+    overflow: hidden;
+}
+
+.inputUrl:hover,
+.input:hover {
+    border-color: #F6B83D;
+}
+
+.error,
+.localWarning{
+    font-size: 10px;
+    color: red;
+    padding-left: 15px;
+    margin-top: -14px;
+}
+
+.activeInput {
+    border-color: #f6b83d !important;
+}
+
+.dateWrapper.activeInput .dateInput {
+    border-color: #f6b83d !important;
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    justify-content: right;
+}
+
+.backBtn,
+.submitBtn{
+    width: 170px;
+    height: 48px;
+    background-color: rgba(38, 38, 38, 0.05);
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    border-radius: 30px;
+    transition: backrground-color 0.3ms ease-in-out;
+}
+
+.submitBtn{
+    background-color: #F6B83D;
+    color: #fff;
+}
+
+.backBtn:hover,
+.submitBtn:hover{
+    background-color: #F9B020   ;
+}
+
+.dateField,
+.speciesField {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.errorField {
+    font-size: 10px;
+    color: red;
+    margin-top: 2px;
+    padding-left: 16px;
+}

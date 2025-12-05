@@ -51,3 +51,14 @@ form{
     stroke: #262626;
     --color2: #262626;
 }
+
+.notices{
+    background-color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.notices::placeholder{
+    color: #262626;
+}

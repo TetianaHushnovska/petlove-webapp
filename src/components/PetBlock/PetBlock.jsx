@@ -45,4 +45,8 @@ export default function PetBlock({ mode }) {
       </div>
     );
   }
+
+  if (mode === "add-pet") {
+    return <div className={css.addWrap}></div>;
+  }
 }

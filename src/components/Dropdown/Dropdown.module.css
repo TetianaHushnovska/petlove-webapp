@@ -70,3 +70,28 @@
 .item:hover {
     background: #f2f2f2;
 }
+
+.item.selected {
+    color: #262626 !important;
+    /* font-weight: 600; */
+}
+
+.addPet .button{
+    width: 210px;
+    height: 52px;
+    border: 1px solid rgba(38, 38, 38, 0.15);
+}
+
+.addPet .button:not(.active):not(.open):not(:hover) {
+    color: rgba(38, 38, 38, 0.4);
+}
+
+.addPet .button:hover {
+    border-color: #f6b83d;
+}
+
+
+.addPet .button.active {
+    border-color: #F6B83D;
+}
+

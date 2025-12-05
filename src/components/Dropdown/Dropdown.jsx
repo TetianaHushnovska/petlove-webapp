@@ -1,25 +1,41 @@
 import { useState, useRef, useEffect } from "react";
 import css from "./Dropdown.module.css";
 
-export default function Dropdown({ label, value, options, onChange }) {
+export default function Dropdown({
+  label,
+  value,
+  options,
+  onChange,
+  variant = "default",
+  showAll = true,
+}) {
   const [open, setOpen] = useState(false);
   const ref = useRef();
 
   useEffect(() => {
-    const close = (e) => {
+    const handleClick = (e) => {
       if (ref.current && !ref.current.contains(e.target)) {
         setOpen(false);
       }
     };
-    document.addEventListener("mousedown", close);
-    return () => document.removeEventListener("mousedown", close);
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  const handleSelect = (opt) => {
+    onChange(opt);
+    setOpen(false);
+  };
+
   return (
-    <div className={css.wrapper} ref={ref}>
+    <div className={`${css.wrapper} ${css[variant] || ""}`} ref={ref}>
       <button
         type="button"
-        className={`${css.button} ${open ? css.open : ""}`}
+        className={`
+    ${css.button} 
+    ${open ? css.open : ""} 
+    ${value ? css.active : ""}
+  `}
         onClick={() => setOpen((prev) => !prev)}
       >
         {value || label}
@@ -28,13 +44,19 @@ export default function Dropdown({ label, value, options, onChange }) {
 
       {open && (
         <div className={css.menu}>
-          <div className={css.showAll} onClick={() => onChange("")}>
-            Show all
-          </div>
+          {showAll && (
+            <div className={css.showAll} onClick={() => handleSelect("")}>
+              Show all
+            </div>
+          )}
 
           <ul className={css.list}>
             {options.map((opt) => (
-              <li key={opt} className={css.item} onClick={() => onChange(opt)}>
+              <li
+                key={opt}
+                className={`${css.item} ${opt === value ? css.selected : ""}`}
+                onClick={() => handleSelect(opt)}
+              >
                 {opt}
               </li>
             ))}

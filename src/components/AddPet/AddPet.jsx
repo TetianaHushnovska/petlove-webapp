@@ -3,7 +3,7 @@ import css from "./AddPet.module.css";
 
 export default function AddPet() {
   return (
-    <Link type="button" className={css.addPet}>
+    <Link to="/add-pet" className={css.addPet}>
       Add pet
       <svg className={css.icon}>
         <use href="/icons.svg#icon-plus" />

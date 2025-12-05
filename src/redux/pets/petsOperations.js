@@ -13,8 +13,12 @@ export const fetchPets = createAsyncThunk(
         if (category) params.category = category;
         if (gender) params.sex = gender;
         if (type) params.species = type;
-        if (location) params.location = location;
-        if (sort) params.sort = sort;
+        if (location) params.locationId = location;
+
+        if (sort === "cheap") params.byPrice = true;
+        if (sort === "popular") params.byPopularity = true;
+
+        console.log("🔍 fetchPets → params:", params);
 
         try {
             const { data } = await api.get("/notices", { params });
@@ -22,7 +26,7 @@ export const fetchPets = createAsyncThunk(
             return {
                 items: data.results,
                 page: data.page,
-                totalPages: data.totalPages
+                totalPages: data.totalPages,
             };
         } catch (err) {
             return thunkAPI.rejectWithValue(err.response?.data || err.message);
@@ -37,8 +41,7 @@ export const fetchCategories = createAsyncThunk(
         try {
             const { data } = await api.get("/notices/categories");
             return data;
-        }
-        catch (err) {
+        } catch (err) {
             return thunkAPI.rejectWithValue(err.message);
         }
     }
@@ -50,8 +53,7 @@ export const fetchGenders = createAsyncThunk(
         try {
             const { data } = await api.get("/notices/sex");
             return data;
-        }
-        catch (err) {
+        } catch (err) {
             return thunkAPI.rejectWithValue(err.message);
         }
     }
@@ -63,13 +65,11 @@ export const fetchTypes = createAsyncThunk(
         try {
             const { data } = await api.get("/notices/species");
             return data;
-        }
-        catch (err) {
+        } catch (err) {
             return thunkAPI.rejectWithValue(err.message);
         }
     }
 );
-
 
 export const fetchNoticeById = createAsyncThunk(
     "pets/fetchNoticeById",

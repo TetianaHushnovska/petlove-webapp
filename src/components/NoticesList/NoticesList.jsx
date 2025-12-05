@@ -2,20 +2,24 @@ import { useSelector } from "react-redux";
 import NoticesItem from "../NoticesItem/NoticesItem";
 import css from "./NoticesList.module.css";
 import { selectPetsLoading } from "../../redux/pets/petsSelectors";
-import NotFound from "../NotFound/NotFound";
+import Loader from "../Loader/Loader";
 
-export default function NoticesList({ items = [] }) {
-  const loading = useSelector(selectPetsLoading);
+export default function NoticesList({
+  items = [],
+  compact = false,
+  isViewed = false,
+}) {
+  const isLoading = useSelector(selectPetsLoading);
 
-  if (!loading && items.length === 0) {
-    return <NotFound />;
+  if (isLoading) {
+    return <Loader />;
   }
 
   return (
-    <ul className={css.list}>
+    <ul className={`${css.list} ${compact ? css.compactList : ""}`}>
       {items.map((item) => (
         <li key={item._id}>
-          <NoticesItem item={item} />
+          <NoticesItem item={item} compact={compact} isViewed={isViewed} />
         </li>
       ))}
     </ul>

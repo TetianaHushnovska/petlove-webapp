@@ -4,8 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchNoticeById } from "../../redux/pets/petsOperations";
 
-import { addFavorite, removeFavorite } from "../../redux/auth/authOperations";
-import { selectFavorites } from "../../redux/auth/authSelectors";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../redux/favorites/favoritesOperations";
+import { selectFavorites } from "../../redux/favorites/favoritesSelectors";
 
 import { safeValue, formatDate } from "../../utils/formatValue";
 
@@ -13,18 +16,23 @@ export default function ModalNotice({ id, onClose }) {
   const dispatch = useDispatch();
 
   const notice = useSelector((state) => state.pets.currentNotice);
+
   const favorites = useSelector(selectFavorites);
-  const isFav = favorites.includes(id);
+
+  // ⭐ ПРАВИЛЬНА ПЕРЕВІРКА
+  const isFav = favorites.some((f) => f._id === id);
 
   useEffect(() => {
     dispatch(fetchNoticeById(id));
   }, [dispatch, id]);
 
+  // Заборона скролу
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "auto");
   }, []);
 
+  // ESC для закриття
   useEffect(() => {
     const esc = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", esc);
@@ -38,8 +46,11 @@ export default function ModalNotice({ id, onClose }) {
   const handleFavorite = () => {
     if (!notice) return;
 
-    if (isFav) dispatch(removeFavorite(id));
-    else dispatch(addFavorite(id));
+    if (isFav) {
+      dispatch(removeFromFavorites(id));
+    } else {
+      dispatch(addToFavorites(id));
+    }
   };
 
   if (!notice) {

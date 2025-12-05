@@ -14,8 +14,6 @@ export const clearToken = () => {
     delete api.defaults.headers.common.Authorization;
 }
 
-
-
 // Register
 export const registerUser = createAsyncThunk(
     "auth/register",
@@ -147,6 +145,31 @@ export const uploadAvatar = createAsyncThunk(
     async (formData, thunkAPI) => {
         try {
             const { data } = await api.patch("/users/avatar", formData);
+            return data;
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err.response?.data || err.message);
+        }
+    }
+);
+
+//Add pet
+export const addPet = createAsyncThunk(
+    "pets/addPet",
+    async (petData, thunkAPI) => {
+        try {
+            const { data } = await api.post("/users/current/pets/add", petData);
+            return data;
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err.response?.data || err.message);
+        }
+    }
+);
+
+export const deletePet = createAsyncThunk(
+    "pets/deletePet",
+    async (petId, thunkAPI) => {
+        try {
+            const { data } = await api.delete(`/users/current/pets/remove/${petId}`);
             return data;
         } catch (err) {
             return thunkAPI.rejectWithValue(err.response?.data || err.message);

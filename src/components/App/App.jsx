@@ -15,6 +15,10 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import { Layout } from "../Layout/Layout";
 
 import { refreshUser } from "../../redux/auth/authOperations";
+import { fetchFavorites } from "../../redux/favorites/favoritesOperations";
+import AddPetPage from "../../pages/AddPetPage/AddPetPage";
+import { Toaster } from "react-hot-toast";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 
 function App() {
   const location = useLocation();
@@ -22,13 +26,21 @@ function App() {
 
   const token = useSelector((state) => state.auth.token);
   const isRefreshing = useSelector((state) => state.auth.isRefreshing);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  // 🔥 1. Refresh user after reload (if token exists)
+  // 1️⃣ Refresh user after reload
   useEffect(() => {
     if (token) {
       dispatch(refreshUser());
     }
   }, [token, dispatch]);
+
+  // 2️⃣ Load favorites AFTER user is refreshed
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(fetchFavorites());
+    }
+  }, [isLoggedIn, dispatch]);
 
   // Background color logic
   useEffect(() => {
@@ -44,27 +56,41 @@ function App() {
   if (isRefreshing) return null;
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Navigate to="/home" replace />} />
+    <>
+      <Toaster position="top-right" />
 
-        <Route path="home" element={<HomePage />} />
-        <Route path="register" element={<RegisterPage />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="news" element={<NewsPage />} />
-        <Route path="friends" element={<FriendsPage />} />
-        <Route path="notices" element={<NoticesPage />} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Navigate to="/home" replace />} />
 
-        <Route
-          path="profile"
-          element={
-            <PrivateRoute>
-              <ProfilePage />
-            </PrivateRoute>
-          }
-        />
-      </Route>
-    </Routes>
+          <Route path="home" element={<HomePage />} />
+          <Route path="register" element={<RegisterPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="news" element={<NewsPage />} />
+          <Route path="friends" element={<FriendsPage />} />
+          <Route path="notices" element={<NoticesPage />} />
+
+          <Route
+            path="profile"
+            element={
+              <PrivateRoute>
+                <ProfilePage />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="add-pet"
+            element={
+              <PrivateRoute>
+                <AddPetPage />
+              </PrivateRoute>
+            }
+          />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </>
   );
 }
 

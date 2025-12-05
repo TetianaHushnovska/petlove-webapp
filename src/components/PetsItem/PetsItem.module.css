@@ -1,0 +1,75 @@
+.cardWrap{
+    width: 440px;
+    height: 130px;
+    border-radius: 20px;
+    border: 1px solid rgba(38, 38, 38, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    position: relative;
+}
+
+.deleteBtn{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #FFF4DF;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transition: backgrond-color 0.3ms ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon{
+    width: 18px;
+    height: 18px;
+}
+
+.deleteBtn:hover{
+    background-color: #FBE7C1;
+}
+
+.img{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.title{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    margin: 14px 0 12px 0;
+}
+
+.details{
+    width: 243px;
+    display: flex;
+    flex-direction: row;
+    gap: 27px;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.param {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 14px;
+    letter-spacing: -0.02em;
+    color: rgba(38, 38, 38, 0.5);
+}
+
+.paramDetail {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    letter-spacing: -0.02em;
+}

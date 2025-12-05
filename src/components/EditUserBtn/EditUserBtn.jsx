@@ -9,7 +9,6 @@ export default function EditUserBtn({ mode = "profile", onClick }) {
     );
   }
 
-  // режим profile (іконка)
   return (
     <button type="button" className={css.editBtn} onClick={onClick}>
       <svg className={css.icon}>

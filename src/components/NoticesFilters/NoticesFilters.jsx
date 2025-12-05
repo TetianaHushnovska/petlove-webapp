@@ -18,19 +18,22 @@ import {
   selectPetsCategory,
   selectPetsGender,
   selectPetsType,
+  selectPetsLocation,
+  selectPetsSort,
   selectAreFiltersActive,
 } from "../../redux/pets/petsSelectors";
 
 import { fetchAvailableCities } from "../../redux/locations/locationsOperations";
-
 import { clearSearchResults } from "../../redux/locations/locationsSlice";
 
-import SearchField from "../SearchField/SearchField";
+import { fetchPets } from "../../redux/pets/petsOperations";
 
-import css from "./NoticesFilters.module.css";
+import SearchField from "../SearchField/SearchField";
 import Dropdown from "../Dropdown/Dropdown";
 import CitySelect from "../CitySelect/CitySelect";
 import TagsFilter from "../TagsFilter/TagsFilter";
+
+import css from "./NoticesFilters.module.css";
 
 export default function NoticesFilters() {
   const dispatch = useDispatch();
@@ -39,17 +42,24 @@ export default function NoticesFilters() {
   const category = useSelector(selectPetsCategory);
   const gender = useSelector(selectPetsGender);
   const type = useSelector(selectPetsType);
+  const location = useSelector(selectPetsLocation);
+  const sort = useSelector(selectPetsSort);
+  const areFiltersActive = useSelector(selectAreFiltersActive);
 
   const categoriesList = useSelector(selectCategories);
   const gendersList = useSelector(selectGenders);
   const typesList = useSelector(selectTypes);
-  const areFiltersActive = useSelector(selectAreFiltersActive);
 
   const [localSearch, setLocalSearch] = useState(search);
 
   useEffect(() => {
     dispatch(fetchAvailableCities());
   }, [dispatch]);
+
+  // 🔁 Автоматичний повторний запит при зміні будь-якого фільтра
+  useEffect(() => {
+    dispatch(fetchPets());
+  }, [search, category, gender, type, location, sort, dispatch]);
 
   const handleSearchSubmit = () => {
     dispatch(setSearch(localSearch));
@@ -69,6 +79,7 @@ export default function NoticesFilters() {
           value={localSearch}
           onChange={setLocalSearch}
           onSubmit={handleSearchSubmit}
+          variant="notices"
         />
 
         {/* CATEGORY */}
@@ -77,6 +88,7 @@ export default function NoticesFilters() {
           value={category}
           options={categoriesList}
           onChange={(val) => dispatch(setCategory(val))}
+          showAll={true}
         />
 
         {/* GENDER */}
@@ -85,6 +97,7 @@ export default function NoticesFilters() {
           value={gender}
           options={gendersList}
           onChange={(val) => dispatch(setGender(val))}
+          showAll={true}
         />
 
         {/* TYPE */}
@@ -93,6 +106,7 @@ export default function NoticesFilters() {
           value={type}
           options={typesList}
           onChange={(val) => dispatch(setType(val))}
+          showAll={true}
         />
 
         {/* CITY AUTOCOMPLETE */}

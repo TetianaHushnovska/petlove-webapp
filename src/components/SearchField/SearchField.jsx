@@ -1,6 +1,11 @@
 import css from "./SearchField.module.css";
 
-export default function SearchField({ value, onChange, onSubmit }) {
+export default function SearchField({
+  value,
+  onChange,
+  onSubmit,
+  variant = "news",
+}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit();
@@ -10,7 +15,7 @@ export default function SearchField({ value, onChange, onSubmit }) {
     <form className={css.form} onSubmit={handleSubmit}>
       <input
         type="text"
-        className={css.input}
+        className={`${css.input} ${css[variant]}`}
         placeholder="Search"
         value={value}
         onChange={(e) => onChange(e.target.value)}

@@ -1,0 +1,23 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.backdrop {
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(1px);
+    pointer-events: all;
+}
+
+.loader {
+    width: 80px;
+    height: 80px;
+}

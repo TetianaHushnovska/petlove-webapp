@@ -1,0 +1,78 @@
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 17, 17, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal {
+    position: relative;
+    width: 410px;
+    padding: 55px;
+    background: #fff;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.closeBtn {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.icon {
+    width: 12px;
+    height: 12px;
+    --color2: #262626;
+}
+
+.iconWrapper{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #FFF4DF;
+    margin: 0 auto 20px auto;
+    font-size: 44px;
+    line-height: 80px;
+}
+
+.title{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+    color: #F6B83D;
+}
+
+.text{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+}
+
+.primaryBtn{
+    width: 250px;
+    height: 48px;
+    border-radius: 30px;
+    background-color: #F6B83D;
+    color: #fff;
+    margin: 0 auto;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    transition: all 0.3ms ease-in-out;
+}
+
+.primaryBtn:hover{
+    background-color: #F9B020;
+}

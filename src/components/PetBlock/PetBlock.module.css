@@ -1,4 +1,4 @@
-.registerWrap, .loginWrap{
+.registerWrap, .loginWrap, .addWrap{
     width: 592px;
     height: 654px;
     border-radius: 60px;
@@ -16,6 +16,13 @@
     background-image: image-set(
         url("/img/login.jpg") 1x,
         url("/img/login@2x.jpg") 2x
+    );
+}
+
+.addWrap{
+    background-image: image-set(
+        url("/img/add.jpg") 1x,
+        url("/img/add@2x.jpg") 2x
     );
 }
 
